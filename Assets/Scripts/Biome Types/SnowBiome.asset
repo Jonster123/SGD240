@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be97b8692969010429e83a7e2e37faa8, type: 3}
+  m_Name: SnowBiome
+  m_EditorClassIdentifier: 
+  biomeName: Forrest
+  plantPrefabs:
+  - {fileID: 2622577667776559501, guid: d0259133efc22114f834668da591272d, type: 3}
+  - {fileID: 2627573985752465660, guid: de4fe8aae67226d4c990084dc1bee7ba, type: 3}
+  plantProbabilities:
+  - 50
+  - 100
