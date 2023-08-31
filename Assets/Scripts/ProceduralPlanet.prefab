@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9193234026865835315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9193234026865835277}
+  - component: {fileID: 9193234026865835274}
+  - component: {fileID: 9193234026865835275}
+  m_Layer: 0
+  m_Name: ProceduralPlanet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9193234026865835277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193234026865835315}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -100, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &9193234026865835274
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193234026865835315}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials: []
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9193234026865835275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193234026865835315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb5302e8d272544f8ed045d6fd0fdc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 100
+  depth: 100
+  scale: 50
+  moistureScale: 30
+  mountainBlock: {fileID: 2627573985752465660, guid: 8c353c097a9fdd940b20fe5bd6814884, type: 3}
+  forestBlock: {fileID: 2627573985752465660, guid: 8c353c097a9fdd940b20fe5bd6814884, type: 3}
+  desertBlock: {fileID: 2627573985752465660, guid: 463a7beb7adae034ab953cbbf5c010de, type: 3}
+  grasslandBlock: {fileID: 2627573985752465660, guid: 51de00c27b4f2ee4ea1a540e3c1d93b2, type: 3}
+  beachBlock: {fileID: 2627573985752465660, guid: 99953fef7b7e40846972861dc879e325, type: 3}
+  oceanBlock: {fileID: 2627573985752465660, guid: ffc3ffac9d214e24bacff17e1657b4d4, type: 3}
+  snowBlock: {fileID: 2627573985752465660, guid: de4fe8aae67226d4c990084dc1bee7ba, type: 3}
+  forestMeshes:
+  - {fileID: 2622577667776559501, guid: d0259133efc22114f834668da591272d, type: 3}
+  desertMeshes:
+  - {fileID: 2622577667776559501, guid: b426e5836f19a1341a207905f6cdd777, type: 3}
+  mountainMeshes:
+  - {fileID: 2622577667776559501, guid: 7484cbc85a6ae37408c799058e0c9ff5, type: 3}
+  grasslandMeshes:
+  - {fileID: 2622577667776559501, guid: bd149ab42724b064c83aad003dd0b9c1, type: 3}
+  beachMeshes:
+  - {fileID: 2622577667776559501, guid: b426e5836f19a1341a207905f6cdd777, type: 3}
+  oceanMeshes:
+  - {fileID: 2622577667776559501, guid: 7484cbc85a6ae37408c799058e0c9ff5, type: 3}
+  snowMeshes:
+  - {fileID: 2622577667776559501, guid: d0259133efc22114f834668da591272d, type: 3}
+  forestMeshDensity: 0.1
+  desertMeshDensity: 0.05
+  mountainMeshDensity: 1
+  grasslandMeshDensity: 0.08
+  beachMeshDensity: 0.05
+  oceanMeshDensity: 0.02
+  snowMeshDensity: 0.02
