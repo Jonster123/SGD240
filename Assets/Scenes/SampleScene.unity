@@ -504,13 +504,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1747621919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6e16072d7326364d841a3024e5c00ee, type: 3}
+  m_Script: {fileID: 11500000, guid: dbb5302e8d272544f8ed045d6fd0fdc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldSize: 4
-  chunkSize: 32
-  biomes:
-  - {fileID: 11400000, guid: 7943386f64d3d1947a18a4e6d18fc5a9, type: 2}
-  - {fileID: 11400000, guid: b19fcd44b64a3d347ac852fa8d43cb07, type: 2}
-  - {fileID: 11400000, guid: 9d57b0a10e04a58428b1b52c23d3040f, type: 2}
-  - {fileID: 11400000, guid: 3bda9392fa716154399efd56b7b7b7de, type: 2}
+  width: 100
+  depth: 100
+  scale: 20
+  moistureScale: 30
+  mountainBlock: {fileID: 2627573985752465660, guid: 8c353c097a9fdd940b20fe5bd6814884, type: 3}
+  forestBlock: {fileID: 2627573985752465660, guid: 8c353c097a9fdd940b20fe5bd6814884, type: 3}
+  desertBlock: {fileID: 2627573985752465660, guid: 463a7beb7adae034ab953cbbf5c010de, type: 3}
+  grasslandBlock: {fileID: 2627573985752465660, guid: 51de00c27b4f2ee4ea1a540e3c1d93b2, type: 3}
+  beachBlock: {fileID: 2627573985752465660, guid: 99953fef7b7e40846972861dc879e325, type: 3}
+  oceanBlock: {fileID: 2627573985752465660, guid: ffc3ffac9d214e24bacff17e1657b4d4, type: 3}
+  snowBlock: {fileID: 2627573985752465660, guid: de4fe8aae67226d4c990084dc1bee7ba, type: 3}
