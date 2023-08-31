@@ -17,6 +17,9 @@ public class Biome
 
 public class TerrainAndBiomeGenerator : MonoBehaviour
 {
+    [Header("General Settings")]
+    public int seed = 0;
+
     [Header("Terrain Settings")]
     public int width = 100;
     public int depth = 100;
@@ -28,6 +31,7 @@ public class TerrainAndBiomeGenerator : MonoBehaviour
 
     private void Start()
     {
+        Random.InitState(seed); // Initialize random number generator with the seed
         GenerateTerrainAndBiomes();
     }
 
@@ -37,8 +41,8 @@ public class TerrainAndBiomeGenerator : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                float altitude = Mathf.PerlinNoise(x / scale, z / scale);
-                float moisture = Mathf.PerlinNoise((x + width) / moistureScale, (z + depth) / moistureScale);
+                float altitude = Mathf.PerlinNoise(seed + x / scale, seed + z / scale);
+                float moisture = Mathf.PerlinNoise(seed + (x + width) / moistureScale, seed + (z + depth) / moistureScale);
 
                 Biome biome = DetermineBiome(altitude, moisture);
 
