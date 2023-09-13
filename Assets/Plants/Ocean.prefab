@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7320166008148506537}
   - component: {fileID: 3214117414660936193}
   m_Layer: 0
-  m_Name: RedPlant
+  m_Name: Ocean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1521580490401125275
 MeshFilter:
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88cbbe608191af94c9cde3ddfdc6a326, type: 2}
+  - {fileID: 2100000, guid: 988a3f32bffde334dac1742f50caf3be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

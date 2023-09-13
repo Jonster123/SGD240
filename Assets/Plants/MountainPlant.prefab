@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7320166008148506537}
   - component: {fileID: 3214117414660936193}
   m_Layer: 0
-  m_Name: RedPlant
+  m_Name: MountainPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88cbbe608191af94c9cde3ddfdc6a326, type: 2}
+  - {fileID: 2100000, guid: a6893b9442f10b2418181be60f6d0bb3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

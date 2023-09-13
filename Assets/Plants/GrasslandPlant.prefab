@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7320166008148506537}
   - component: {fileID: 3214117414660936193}
   m_Layer: 0
-  m_Name: PinkPlant
+  m_Name: GrasslandPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0181b2f835f6ab4b944139b694e01f1, type: 2}
+  - {fileID: 2100000, guid: 29122fc0ba91bae42865ff7f92a648c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
