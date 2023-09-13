@@ -362,8 +362,24 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 9193234026865835275, guid: c448206dea6304948a00086a8abee7e4, type: 3}
+      propertyPath: maxChunks
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193234026865835275, guid: c448206dea6304948a00086a8abee7e4, type: 3}
+      propertyPath: maxChunksX
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193234026865835275, guid: c448206dea6304948a00086a8abee7e4, type: 3}
+      propertyPath: maxChunksZ
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193234026865835275, guid: c448206dea6304948a00086a8abee7e4, type: 3}
       propertyPath: moistureScale
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9193234026865835275, guid: c448206dea6304948a00086a8abee7e4, type: 3}
+      propertyPath: renderDistance
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9193234026865835275, guid: c448206dea6304948a00086a8abee7e4, type: 3}
       propertyPath: smoothingFactor
@@ -515,7 +531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9193234026865835275, guid: c448206dea6304948a00086a8abee7e4, type: 3}
       propertyPath: biomes.Array.data[1].meshDensity
-      value: 0.05
+      value: 0.0005
       objectReference: {fileID: 0}
     - target: {fileID: 9193234026865835275, guid: c448206dea6304948a00086a8abee7e4, type: 3}
       propertyPath: biomes.Array.data[1].minAltitude

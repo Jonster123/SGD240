@@ -19,56 +19,98 @@ public class TerrainAndBiomeGenerator : MonoBehaviour
 {
     [Header("General Settings")]
     public int seed = 0;
+    public int chunkSize = 16;
+    public int renderDistance = 2;
+    public int maxChunks = 20;  // Maximum number of chunks in one direction
 
     [Header("Terrain Settings")]
-    public int width = 100;
-    public int depth = 100;
     public float scale = 20;
     public float moistureScale = 30;
 
     [Header("Biome Settings")]
     public List<Biome> biomes;
 
-    // To keep track of instantiated blocks
-    private GameObject[,] blockMap;
+    private Transform playerTransform;
+    private Vector3 lastPlayerPosition;
+    private Dictionary<Vector2, GameObject> activeChunks;
 
     private void Start()
     {
         Random.InitState(seed);
-        blockMap = new GameObject[width, depth]; // Initialize blockMap
-        GenerateTerrainAndBiomes();
+        playerTransform = Camera.main.transform;
+        activeChunks = new Dictionary<Vector2, GameObject>();
+        lastPlayerPosition = playerTransform.position;
+        GenerateChunksAroundPlayer();
     }
 
-    void GenerateTerrainAndBiomes()
+    private void Update()
     {
-        Biome[,] biomeMap = new Biome[width, depth];
-
-        for (int z = 0; z < depth; z++)
+        Vector3 playerPosition = playerTransform.position;
+        if (Vector3.Distance(lastPlayerPosition, playerPosition) > chunkSize)
         {
-            for (int x = 0; x < width; x++)
+            lastPlayerPosition = playerPosition;
+            GenerateChunksAroundPlayer();
+        }
+    }
+
+    private void GenerateChunksAroundPlayer()
+    {
+        List<Vector2> chunksToRemove = new List<Vector2>();
+
+        foreach (var chunkPosition in activeChunks.Keys)
+        {
+            if (Vector2.Distance(new Vector2(playerTransform.position.x, playerTransform.position.z), chunkPosition) > chunkSize * (renderDistance + 1))
             {
-                float altitude = Mathf.PerlinNoise(seed + x / scale, seed + z / scale);
-                float moisture = Mathf.PerlinNoise(seed + (x + width) / moistureScale, seed + (z + depth) / moistureScale);
-
-                Biome biome = DetermineBiome(altitude, moisture);
-                biomeMap[x, z] = biome;
-
-                if (biome != null)
-                {
-                    GameObject newBlock = Instantiate(biome.blockPrefab, new Vector3(x, altitude * scale, z), Quaternion.identity);
-                    blockMap[x, z] = newBlock; // Store the new block
-                    PlaceMesh(biome, new Vector3(x, altitude * scale + 1, z));
-                }
+                chunksToRemove.Add(chunkPosition);
             }
         }
 
-        for (int z = 1; z < depth - 1; z++)
+        foreach (var chunkPosition in chunksToRemove)
         {
-            for (int x = 1; x < width - 1; x++)
+            Destroy(activeChunks[chunkPosition]);
+            activeChunks.Remove(chunkPosition);
+        }
+
+        int playerChunkX = Mathf.FloorToInt(playerTransform.position.x / chunkSize);
+        int playerChunkZ = Mathf.FloorToInt(playerTransform.position.z / chunkSize);
+
+        for (int x = -renderDistance; x <= renderDistance; x++)
+        {
+            for (int z = -renderDistance; z <= renderDistance; z++)
             {
-                if (biomeMap[x, z]?.name == "Ocean")
+                Vector2 chunkPosition = new Vector2((playerChunkX + x) * chunkSize, (playerChunkZ + z) * chunkSize);
+                if (!activeChunks.ContainsKey(chunkPosition))
                 {
-                    ReplaceAdjacentWithBeach(x, z, biomeMap);
+                    GenerateChunk(chunkPosition);
+                }
+            }
+        }
+    }
+
+    private void GenerateChunk(Vector2 chunkPosition)
+    {
+        if (Mathf.FloorToInt(chunkPosition.x / chunkSize) >= maxChunks || Mathf.FloorToInt(chunkPosition.y / chunkSize) >= maxChunks)
+        {
+            return;
+        }
+
+        GameObject newChunk = new GameObject($"Chunk_{chunkPosition.x}_{chunkPosition.y}");
+        newChunk.transform.position = new Vector3(chunkPosition.x, 0, chunkPosition.y);
+        activeChunks.Add(chunkPosition, newChunk);
+
+        for (int x = 0; x < chunkSize; x++)
+        {
+            for (int z = 0; z < chunkSize; z++)
+            {
+                float altitude = Mathf.PerlinNoise(seed + (chunkPosition.x + x) / scale, seed + (chunkPosition.y + z) / scale);
+                float moisture = Mathf.PerlinNoise(seed + (chunkPosition.x + x + chunkSize) / moistureScale, seed + (chunkPosition.y + z + chunkSize) / moistureScale);
+
+                Biome biome = DetermineBiome(altitude, moisture);
+
+                if (biome != null)
+                {
+                    Instantiate(biome.blockPrefab, new Vector3(chunkPosition.x + x, altitude * scale, chunkPosition.y + z), Quaternion.identity, newChunk.transform);
+                    PlaceMesh(biome, new Vector3(chunkPosition.x + x, altitude * scale + 1, chunkPosition.y + z), newChunk.transform);
                 }
             }
         }
@@ -87,49 +129,19 @@ public class TerrainAndBiomeGenerator : MonoBehaviour
         return null;
     }
 
-    void PlaceMesh(Biome biome, Vector3 position)
+    void PlaceMesh(Biome biome, Vector3 position, Transform parentTransform)
     {
+        // Use position-based seed to ensure deterministic randomness
+        int deterministicSeed = seed ^ (int)position.x ^ ((int)position.z << 16) ^ ((int)position.y << 8);
+        Random.InitState(deterministicSeed);
+
         if (Random.value < biome.meshDensity)
         {
-            Instantiate(biome.meshPrefabs[Random.Range(0, biome.meshPrefabs.Count)], position, Quaternion.identity);
+            GameObject prefab = biome.meshPrefabs[Random.Range(0, biome.meshPrefabs.Count)];
+            Instantiate(prefab, position, Quaternion.identity, parentTransform);
         }
+
+        // Reset random state to global state to ensure other random behaviors in your game aren't affected.
+        Random.InitState(System.Environment.TickCount);
     }
-
-    void ReplaceAdjacentWithBeach(int x, int z, Biome[,] biomeMap)
-    {
-        Biome beachBiome = biomes.Find(b => b.name == "Beach");
-        if (beachBiome == null) return;
-
-        int range = 10; // Change this value to adjust the range. E.g., 2 for a 5x5 grid, 1 for a 3x3 grid.
-
-        for (int dx = -range; dx <= range; dx++)
-        {
-            for (int dz = -range; dz <= range; dz++)
-            {
-                int newX = x + dx;
-                int newZ = z + dz;
-
-                // Check bounds
-                if (newX >= 0 && newX < width && newZ >= 0 && newZ < depth)
-                {
-                    if (biomeMap[newX, newZ]?.name != "Ocean")
-                    {
-                        GameObject oldBlock = blockMap[newX, newZ];
-                        if (oldBlock != null)
-                        {
-                            Destroy(oldBlock); // Remove the existing block
-                        }
-
-                        float altitude = Mathf.PerlinNoise(seed + newX / scale, seed + newZ / scale);
-                        GameObject newBlock = Instantiate(beachBiome.blockPrefab, new Vector3(newX, altitude * scale, newZ), Quaternion.identity);
-                        blockMap[newX, newZ] = newBlock; // Store the new block
-                        biomeMap[newX, newZ] = beachBiome; // Update the biomeMap
-
-                        PlaceMesh(beachBiome, new Vector3(newX, altitude * scale + 1, newZ));
-                    }
-                }
-            }
-        }
-    }
-
 }
